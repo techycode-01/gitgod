@@ -116,7 +116,7 @@ curl -X PUT http://localhost:5000/api/users/update/<USER_ID> \
 }'
 ```
 
-**Postman Collection (Import Ready->copy paste)**
+**Postman Collection (Import Ready)**
 
 ```json
 {
@@ -158,7 +158,7 @@ curl -X PUT http://localhost:5000/api/users/update/<USER_ID> \
       }
     },
     {
-      "name": "Get All Users",
+      "σιμο": "Get All Users",
       "request": {
         "method": "GET",
         "header": [{ "key": "Cookie", "value": "connect.sid={{session}}" }],
@@ -212,7 +212,7 @@ curl -X PUT http://localhost:5000/api/users/update/<USER_ID> \
 
 #### 8. Upload Leads File
 
-*   `POST /api/leads/upload` → `leadsFile` (XLSX/CSV/PDF)
+*   `POST /api/leads/upload` to `leadsFile` (XLSX/CSV/PDF)
 
 ```bash
 curl -X POST http://localhost:5000/api/leads/upload \
@@ -292,22 +292,22 @@ curl -X GET http://localhost:5000/api/leads/sources/<SOURCE_ID> -b cookies.txt
 
 ```mermaid
 graph TD
-    A[Client Uploads File<br>(XLSX/CSV/PDF)] --> B{Multer Memory Upload}
+    A[Client Uploads File<br>XLSX/CSV/PDF] --> B[Multer Memory Upload]
     B --> C[Create LeadSource Record]
-    C --> D[Parse File<br>(fast-csv / xlsx / pdf-parse)]
-    D --> E[Batch Processing<br>(1000 rows)]
-    E --> F[Validate Fixed Fields<br>(Business Type, State)]
-    F --> G[Check Within-File Duplicates<br>(Email + Phone)]
-    G --> H[Check Global Duplicates<br>(DB Cache + Index)]
-    H --> I[Calculate Lead Score<br>(0–100)]
-    I --> J[Insert Valid Leads<br>(insertMany)]
-    J --> K[Update LeadSource<br>(Success/Failed Count)]
+    C --> D[Parse File]
+    D --> E[Batch Processing<br>1000 rows]
+    E --> F[Validate Fixed Fields<br>Business Type, State]
+    F --> G[Check Within-File Duplicates<br>Email + Phone]
+    G --> H[Check Global Duplicates<br>DB Cache + Index]
+    H --> I[Calculate Lead Score<br>0 to 100]
+    I --> J[Insert Valid Leads]
+    J --> K[Update LeadSource<br>Success/Failed Count]
     K --> L[Return Response]
 ```
 
 ---
 
-## Lead Scoring Algorithm (0–100)
+## Lead Scoring Algorithm (0 to 100)
 
 | Rule | Points |
 |------|--------|
